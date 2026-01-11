@@ -163,3 +163,26 @@ q.addEventListener("input", render);
 cat.addEventListener("change", render);
 
 init();
+
+// Rewarded interstitial (Monetag)
+function showRewardAd(onReward) {
+  const fn = window["show_10449525"]; // la fonction injectée par Monetag
+
+  // Si la pub n'est pas dispo (script pas chargé, pas d'inventaire, etc.)
+  if (typeof fn !== "function") {
+    console.log("Monetag not ready - skipping ad");
+    onReward?.();
+    return;
+  }
+
+  fn()
+    .then(() => {
+      onReward?.(); // récompense après visionnage
+    })
+    .catch((err) => {
+      console.log("Ad failed / not available", err);
+    });
+}
+
+
+        
