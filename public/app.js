@@ -183,6 +183,24 @@ function showRewardAd(onReward) {
       console.log("Ad failed / not available", err);
     });
 }
+function showRewardedAd({ ymid, onReward, onFail } = {}) {
+  const fn = window["show_10449525"]; // main zone id
+
+  if (typeof fn !== "function") {
+    console.log("Monetag SDK not ready yet");
+    onFail?.("not_ready");
+    return;
+  }
+
+  fn({ ymid }) // ymid optionnel
+    .then(() => {
+      onReward?.();
+    })
+    .catch(() => {
+      onFail?.("failed_or_skipped");
+    });
+}
 
 
         
+
