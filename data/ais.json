@@ -1,0 +1,113 @@
+
+[
+  {
+    "name": "ChatGPT",
+    "category": "Texte",
+    "speciality": "Rédaction, explications, brainstorming, aide générale",
+    "strengths": ["Polyvalent", "Pédagogique", "Rapide"],
+    "weaknesses": ["Peut se tromper sans sources"],
+    "best_for": "Étudiants, créateurs, pros",
+    "level": "Tous niveaux",
+    "pricing": "Freemium",
+    "tags": ["Rédaction", "Chat", "Recherche", "Productivité"]
+  },
+  {
+    "name": "Claude",
+    "category": "Texte",
+    "speciality": "Analyse de documents, synthèses longues, écriture structurée",
+    "strengths": ["Très bon en rédaction longue", "Bon sens de la structure"],
+    "weaknesses": ["Selon versions, outils limités"],
+    "best_for": "Rédaction, synthèse, travail sur textes",
+    "level": "Tous niveaux",
+    "pricing": "Freemium",
+    "tags": ["Rédaction", "Recherche", "Productivité"]
+  },
+  {
+    "name": "Gemini",
+    "category": "Texte",
+    "speciality": "Assistant général + intégrations écosystème Google (selon offres)",
+    "strengths": ["Bon assistant général", "Écosystème"],
+    "weaknesses": ["Résultats variables selon tâches"],
+    "best_for": "Usage quotidien, productivité",
+    "level": "Tous niveaux",
+    "pricing": "Freemium",
+    "tags": ["Chat", "Productivité"]
+  },
+  {
+    "name": "Midjourney",
+    "category": "Image",
+    "speciality": "Génération d’images créatives haut niveau",
+    "strengths": ["Style artistique", "Qualité visuelle"],
+    "weaknesses": ["Paramétrage/itérations nécessaires"],
+    "best_for": "Design, art, visuels marketing",
+    "level": "Intermédiaire",
+    "pricing": "Payant",
+    "tags": ["Image", "Design"]
+  },
+  {
+    "name": "DALL·E",
+    "category": "Image",
+    "speciality": "Images à partir de texte, variations, concepts rapides",
+    "strengths": ["Création rapide", "Compréhension de prompts"],
+    "weaknesses": ["Style variable selon scènes"],
+    "best_for": "Illustrations, concepts, miniatures",
+    "level": "Débutant",
+    "pricing": "Freemium",
+    "tags": ["Image", "Design"]
+  },
+  {
+    "name": "Stable Diffusion",
+    "category": "Image",
+    "speciality": "Génération d’images (open-source), contrôle avancé, modèles",
+    "strengths": ["Personnalisable", "Contrôle fin"],
+    "weaknesses": ["Setup plus technique"],
+    "best_for": "Créateurs avancés, workflows",
+    "level": "Pro",
+    "pricing": "Gratuit / Payant",
+    "tags": ["Image", "Design"]
+  },
+  {
+    "name": "Runway",
+    "category": "Vidéo",
+    "speciality": "Création/édition vidéo assistée par IA",
+    "strengths": ["Outils vidéo", "Effets IA"],
+    "weaknesses": ["Plans payants pour usage intensif"],
+    "best_for": "Montage, contenu social",
+    "level": "Intermédiaire",
+    "pricing": "Freemium",
+    "tags": ["Vidéo", "Design", "Productivité"]
+  },
+  {
+    "name": "ElevenLabs",
+    "category": "Audio",
+    "speciality": "Voix IA (text-to-speech) de haute qualité",
+    "strengths": ["Voix naturelles", "Multilingue"],
+    "weaknesses": ["Crédits/quotas"],
+    "best_for": "Voice-over, narration",
+    "level": "Tous niveaux",
+    "pricing": "Freemium",
+    "tags": ["Audio", "Productivité"]
+  },
+  {
+    "name": "Whisper",
+    "category": "Audio",
+    "speciality": "Transcription audio/vidéo (speech-to-text)",
+    "strengths": ["Bonne transcription", "Open-source"],
+    "weaknesses": ["Ressources machine selon usage"],
+    "best_for": "Sous-titres, transcription",
+    "level": "Intermédiaire",
+    "pricing": "Gratuit / Payant",
+    "tags": ["Audio", "Transcription"]
+  },
+  {
+    "name": "GitHub Copilot",
+    "category": "Code",
+    "speciality": "Autocomplétion et aide au code dans l’IDE",
+    "strengths": ["Très bon en productivité dev", "Suggestions contextuelles"],
+    "weaknesses": ["Peut proposer du code imparfait"],
+    "best_for": "Développeurs",
+    "level": "Tous niveaux",
+    "pricing": "Payant",
+    "tags": ["Code", "Productivité"]
+  }
+]
