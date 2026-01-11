@@ -1,56 +1,77 @@
-<!-- public/index.html -->
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AIGuide Atlas</title>
-    <link rel="stylesheet" href="./style.css" />
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  </head>
-  <body>
-    <header class="header">
-      <div class="brand">
-        <div class="logo">AI</div>
-        <div>
-          <h1>AIGuide Atlas</h1>
-          <p>Le répertoire mondial des IA + leurs spécialités</p>
-        </div>
-      </div>
+// bot.js
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
+import { Telegraf, Markup } from "telegraf";
 
-      <div class="controls">
-        <input id="q" type="search" placeholder="Rechercher une IA (ex: image, code, vidéo…)" />
-        <select id="cat" title="Filtrer par catégorie">
-          <option value="all">Toutes catégories</option>
-          <option value="Texte">Texte</option>
-          <option value="Code">Code</option>
-          <option value="Image">Image</option>
-          <option value="Vidéo">Vidéo</option>
-          <option value="Audio">Audio</option>
-          <option value="Data">Data</option>
-        </select>
-      </div>
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-      <div class="chips" id="chips"></div>
-    </header>
+const BOT_TOKEN = process.env.BOT_TOKEN;
+const WEBAPP_URL = process.env.WEBAPP_URL; // ex: https://aiguideatlasbot.onrender.com
+const PORT = process.env.PORT || 3000;
 
-    <main class="main">
-      <section class="grid" id="grid"></section>
+if (!BOT_TOKEN) throw new Error("Missing BOT_TOKEN env var");
+if (!WEBAPP_URL) throw new Error("Missing WEBAPP_URL env var (https URL)");
 
-      <section class="drawer" id="drawer" aria-hidden="true">
-        <div class="drawer-card">
-          <button class="close" id="closeBtn" aria-label="Fermer">✕</button>
-          <div id="detail"></div>
-        </div>
-      </section>
-    </main>
+const app = express();
 
-    <footer class="footer">
-      <span id="count">0 IA</span>
-      <span class="sep">•</span>
-      <span>Astuce : clique sur une carte pour voir la fiche complète.</span>
-    </footer>
+// --- DEBUG (pour confirmer les chemins sur Render)
+const publicDir = path.join(__dirname, "public");
+const indexFile = path.join(publicDir, "index.html");
+const dataFile = path.join(__dirname, "data", "ais.json");
 
-    <script type="module" src="./app.js"></script>
-  </body>
-</html>
+console.log("PUBLIC DIR:", publicDir, "exists:", fs.existsSync(publicDir));
+console.log("INDEX FILE:", indexFile, "exists:", fs.existsSync(indexFile));
+console.log("DATA FILE:", dataFile, "exists:", fs.existsSync(dataFile));
+
+// --- ROUTES
+// 1) Root -> index.html
+app.get("/", (req, res) => {
+  res.sendFile(indexFile);
+});
+
+// 2) Explicit index route
+app.get("/index.html", (req, res) => {
+  res.sendFile(indexFile);
+});
+
+// 3) Static assets (style.css, app.js, etc.)
+app.use(express.static(publicDir));
+
+// 4) IA dataset
+app.get("/api/ais", (req, res) => {
+  res.sendFile(dataFile);
+});
+
+app.listen(PORT, () => {
+  console.log(`HTTP server running on :${PORT}`);
+});
+
+// --- TELEGRAM BOT
+const bot = new Telegraf(BOT_TOKEN);
+
+bot.start(async (ctx) => {
+  const url = WEBAPP_URL.replace(/\/+$/, "");
+  await ctx.reply(
+    "🧠 AIGuide Atlas — ouvre le guide mondial des IA :",
+    Markup.inlineKeyboard([
+      Markup.button.webApp("🚀 Ouvrir la mini-app", `${url}/`)
+    ])
+  );
+});
+
+bot.command("app", async (ctx) => {
+  const url = WEBAPP_URL.replace(/\/+$/, "");
+  await ctx.reply(
+    "Voici la mini-app :",
+    Markup.inlineKeyboard([
+      Markup.button.webApp("📚 Ouvrir AIGuide Atlas", `${url}/`)
+    ])
+  );
+});
+
+bot.launch();
+process.once("SIGINT", () => bot.stop("SIGINT"));
+process.once("SIGTERM", () => bot.stop("SIGTERM"));
