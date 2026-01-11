@@ -1,0 +1,56 @@
+<!-- public/index.html -->
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AIGuide Atlas</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="brand">
+        <div class="logo">AI</div>
+        <div>
+          <h1>AIGuide Atlas</h1>
+          <p>Le répertoire mondial des IA + leurs spécialités</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <input id="q" type="search" placeholder="Rechercher une IA (ex: image, code, vidéo…)" />
+        <select id="cat">
+          <option value="all">Toutes catégories</option>
+          <option value="Texte">Texte</option>
+          <option value="Code">Code</option>
+          <option value="Image">Image</option>
+          <option value="Vidéo">Vidéo</option>
+          <option value="Audio">Audio</option>
+          <option value="Data">Data</option>
+        </select>
+      </div>
+
+      <div class="chips" id="chips"></div>
+    </header>
+
+    <main class="main">
+      <section class="grid" id="grid"></section>
+
+      <section class="drawer" id="drawer" aria-hidden="true">
+        <div class="drawer-card">
+          <button class="close" id="closeBtn" aria-label="Fermer">✕</button>
+          <div id="detail"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span id="count">0 IA</span>
+      <span class="sep">•</span>
+      <span>Astuce : clique sur une carte pour voir la fiche complète.</span>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
